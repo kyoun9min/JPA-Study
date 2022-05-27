@@ -18,12 +18,14 @@ public class JpaMain {
 
         try {
 
-//            Member findMember = em.find(Member.class, 1L);
-            List<Member> result = em.createQuery("select m from Member as m", Member.class).getResultList();
+            // 영속
 
-            for (Member member : result) {
-                System.out.println("member.name = " + member.getName());
-            }
+            Member member = new Member(200L, "member200");
+            em.persist(member);
+
+            em.flush();
+
+            System.out.println("====================");
 
             tx.commit();
         } catch (Exception e) {
